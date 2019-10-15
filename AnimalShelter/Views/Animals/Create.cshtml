@@ -16,8 +16,8 @@
     @Html.LabelFor(model => model.AdmittanceDate)
     @Html.TextBoxFor(model => model.AdmittanceDate)
 
-    <p>Male: @Html.RadioButtonFor(model => model.Gender, 1)</p>  
-    <p>Female: @Html.RadioButtonFor(model => model.Gender, 0)</p> 
+    <p>Male: </p>  @Html.RadioButtonFor(model => model.Gender, "1")
+    <p>Female: </p> @Html.RadioButtonFor(model => model.Gender, "0")
 
     @Html.LabelFor(model => model.Breed)
     @Html.TextBoxFor(model => model.Breed)
