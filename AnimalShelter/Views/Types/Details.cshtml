@@ -1,0 +1,15 @@
+@{
+  Layout = "_Layout";
+}
+
+@model AnimalShelter.Models.Type
+
+<h2>Type Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)<h3>
+
+<p>@Html.ActionLink("Edit Registration", "Edit", new { id = Model.TypeId })</p>
+
+<p>@Html.ActionLink("Delete Registration", "Delete", new { id = Model.TypeId })</p>
+
+<p>@Html.ActionLink("Back to list", "Index")</p>
