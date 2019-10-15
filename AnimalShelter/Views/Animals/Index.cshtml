@@ -14,6 +14,8 @@
 }
 else
 {
+    <p>@Html.ActionLink("Sort By Name", "Index", new { sortOrder = ViewBag.NameSortParm })</p>
+    <p>@Html.ActionLink("Sort By Type", "Index", new { sortOrder = ViewBag.TypeSortParm })</p>
     <ul>
     @foreach(Animal animal in Model)
     {

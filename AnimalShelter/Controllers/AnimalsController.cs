@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using AnimalShelter.Models;
 using System.Collections.Generic;
+using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -16,9 +17,28 @@ namespace AnimalShelter.Controllers
             _db = db;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
             List<Animal> model = _db.Animals.Include(animals => animals.Type).ToList();
+
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.TypeSortParm = sortOrder == "Type" ? "type_desc" : "Type";
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    model = model.OrderByDescending(s => s.Name).ToList();
+                    break;
+                case "Type":
+                    model = model.OrderBy(s => s.Type.Name).ToList();
+                    break;
+                case "type_desc":
+                    model = model.OrderByDescending(s => s.Type.Name).ToList();
+                    break;
+                default:
+                    model = model.OrderBy(s => s.Name).ToList();
+                    break;
+            }
             return View(model);
         }
         public ActionResult Create()
