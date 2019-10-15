@@ -1,0 +1,24 @@
+@{
+  Layout = "_Layout";
+}
+
+@using AnimalShelter.Models;
+@model List<AnimalShelter.Models.Type>;
+
+<h1>Types of Animals At the Shelter</h1>
+
+@if(Model.Count == 0)
+{
+    <p>We have no animals in the shelter at this moment.</p>
+    
+}
+else
+{
+    <ul>
+    @foreach(AnimalShelter.Models.Type type in Model)
+    {
+        <li>@Html.ActionLink($"{type.Name}", "Details", new { id = type.TypeId })</li>
+    }
+    </ul>
+}
+<p>Is the type of animal in need not listed? Create a new one @Html.ActionLink("here", "Create").</p>
