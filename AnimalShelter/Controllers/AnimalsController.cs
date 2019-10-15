@@ -3,6 +3,7 @@ using AnimalShelter.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AnimalShelter.Controllers
 {
@@ -17,11 +18,12 @@ namespace AnimalShelter.Controllers
 
         public ActionResult Index()
         {
-            List<Animal> model = _db.Animals.ToList();
+            List<Animal> model = _db.Animals.Include(animals => animals.Type).ToList();
             return View(model);
         }
         public ActionResult Create()
         {
+            ViewBag.TypeId = new SelectList(_db.Types, "TypeId", "Name");
             return View();
         }
         [HttpPost]
@@ -40,6 +42,7 @@ namespace AnimalShelter.Controllers
         public ActionResult Edit (int id)
         {
             Animal thisAnimal = _db.Animals.FirstOrDefault(animal => animal.AnimalId == id);
+            ViewBag.TypeId = new SelectList(_db.Types, "TypeId", "Name");
             return View(thisAnimal);
         }
 

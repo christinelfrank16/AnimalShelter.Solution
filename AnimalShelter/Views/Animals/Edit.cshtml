@@ -10,6 +10,9 @@
 
 @using (Html.BeginForm())
 {
+    @Html.LabelFor(model => model.Type)
+    @Html.DropDownList("TypeId")
+
     @Html.HiddenFor(model => model.AnimalId)
 
     @Html.LabelFor(model => model.Name)
